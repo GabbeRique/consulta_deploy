@@ -6,6 +6,29 @@ const exphbs = require('express-handlebars');
 const db = require('./config/database');
 const path = require("path");
 
+const { Sequelize } = require('sequelize');
+
+const sequelize = new Sequelize('postgres://consultapeca_user:GDSqCmZUtIjVYty0VgsfcjOELQHKWjwk@dpg-d43rcjeuk2gs739e1750-a.oregon-postgres.render.com:5432/consultapeca', {
+  dialect: 'postgres',
+  protocol: 'postgres',
+  logging: false,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
+});
+
+(async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Conexão com o banco OK!');
+  } catch (error) {
+    console.error('Erro ao conectar:', error);
+  }
+})();
+
 
 
 const Login = require('./model/login.model');
