@@ -1,0 +1,50 @@
+<a href="/index_adm_predial"><button class="btn">Voltar para o Home</button></a><br>
+<a href="/addPeca_predial"><button class="btn">Adicionar Peça</button></a><br>
+<h2>Listar Peças - Predial</h2>
+
+<form action="/tabelaPeca_predial" method="GET">
+  <label for="equipamento_nome">Equipamento:</label>
+  <select id="equipamento_nome" name="equipamento_nome">
+    <option value="">Tudo</option>
+    {{#each equipamentos}}
+    <option value="{{this.nome}}" {{#ifCond this.nome ../equipamento_nome}}selected{{/ifCond}}>{{this.nome}}</option>
+    {{/each}}
+  </select><br>
+
+  <label for="categoria">Categoria:</label>
+  <select id="categoria" name="categoria">
+    <option value="">Tudo</option>
+    <option value="Elétrica" {{#ifCond "Elétrica" categoria}}selected{{/ifCond}}>Elétrica</option>
+    <option value="Mecânica" {{#ifCond "Mecânica" categoria}}selected{{/ifCond}}>Mecânica</option>
+    <option value="Diversos" {{#ifCond "Diversos" categoria}}selected{{/ifCond}}>Diversos</option>
+  </select><br>
+
+  <label><input type="text" id="nome_peca" name="nome_peca" placeholder="Nome da Peça" value="{{nome_peca}}"></label><br><br>
+
+  <button type="submit" class="btn">Filtrar</button><br>
+</form>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome da Peça</th>
+      <th>SAP</th>
+      <th>Categoria</th>
+      <th>Equipamento</th>
+      <th>Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each Pecas}}
+    <tr>
+      <td>{{this.nome_peca}}</td>
+      <td>{{this.SAP}}</td>
+      <td>{{this.categoria}}</td>
+      <td>{{this.equipamento_nome}}</td>
+      <td><a href="/delPeca_predial/{{this.id}}" onclick="return confirm('Tem certeza?')"><button class="btn">Deletar</button></a><br>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
