@@ -29,6 +29,9 @@ const peca_predial = require('./model/peca_predial');
 
 app.use(express.static('public'));
 
+app.set('views', path.join(__dirname, 'views'));
+
+
 const favicon = require('serve-favicon');
 app.use(favicon(path.join(__dirname, 'public', 'favicon_io', 'favicon.ico')));
 
